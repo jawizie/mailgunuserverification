@@ -1,16 +1,13 @@
 <?php
-session_start();
-error_reporting(0);
-include 'config.php';
 
 #Mailgun Libraries
 require '../../../../vendor/autoload.php';
 use Mailgun\Mailgun;
 # Instantiate the client.
-$mgClient = new Mailgun('key-53a546688bce3bdf0f7ad7d147039f23');
-$domain = "letsgo.co.zw";
+$mgClient = new Mailgun('apikey here');
+$domain = "sandoboxdomain here";
 
-# email address post from form
+# email address post from form 
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 $email = strtolower($request->email);
@@ -44,17 +41,6 @@ if($email != ''){
                 'to'      => $email,
                 'subject' => 'Email Verification',
                 'text'    => $message));
-       /* $queryString = array(
-            'begin'        => 'Fri, 3 May 2013 09:00:00 -0000',
-            'ascending'    => 'yes',
-            'limit'        =>  25,
-            'pretty'       => 'yes',
-            'subject'      => 'test'
-        );
-
-        # Make the call to the client.
-        $result = $mgClient->get("$domain/events", $queryString);*/
-
         # You can see a record of this email in your logs: https://mailgun.com/app/logs .
         echo 'Message sent';
         # You can send up to 300 emails/day from this sandbox server.
