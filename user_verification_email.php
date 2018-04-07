@@ -8,6 +8,7 @@ $mgClient = new Mailgun('apikey here');
 $domain = "sandoboxdomain here";
 
 # email address post from form 
+#this line works if you're fetching data as json from your form I used AngularJS for data posting and validation that is why i am converting my data from json 
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 $email = strtolower($request->email);
@@ -32,12 +33,12 @@ if($email != ''){
             ------------------------
         
             You are a step closer to verifying your account.        
-            Please click this link to activate your account: http://www.letsgo.co.zw/user/email-verification.php?verification_token='.$user_id.'&actif='.$hash.'
+            Please click this link to activate your account: http://your-domain/user/email-verification.php?verification_token='.$user_id.'&actif='.$hash.'
         ';
         //send email with mailgun
         # Make the call to the client.
         $result = $mgClient->sendMessage("$domain",
-            array('from'    => 'Lets Go ZW <no-reply@letsgo.co.zw>',
+            array('from'    => 'Your-App <no-reply@your-domain>',
                 'to'      => $email,
                 'subject' => 'Email Verification',
                 'text'    => $message));
