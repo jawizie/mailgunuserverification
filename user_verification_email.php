@@ -1,7 +1,7 @@
 <?php
 
 #Mailgun Libraries
-require '../../../../vendor/autoload.php';
+require 'vendor/autoload.php';
 use Mailgun\Mailgun;
 # Instantiate the client.
 $mgClient = new Mailgun('apikey here');
